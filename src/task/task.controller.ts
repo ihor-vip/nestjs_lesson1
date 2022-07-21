@@ -1,7 +1,18 @@
-import {Body, Controller, Get, HttpException, Param, Post, UsePipes, ValidationPipe} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  Param,
+  ParseIntPipe,
+  Post,
+  UsePipes,
+  ValidationPipe
+} from '@nestjs/common';
 import {ITask} from "@src/task/task.interface";
 import {TaskService} from "@src/task/task.service";
 import {CreateTaskDto} from "@src/task/dto/create-task.dto";
+import {EmailPipe} from "@src/task/pipes/email.pipe";
 
 
 @Controller('task')
@@ -16,7 +27,7 @@ export class TaskController {
     }
 
     @Get(':id')
-    getTaskById(@Param('id') id: string): ITask {
+    getTaskById(@Param('id', ParseIntPipe) id: number): ITask {
         return this.taskService.getTaskById(id);
     }
 
@@ -24,6 +35,11 @@ export class TaskController {
     @Post()
     createTask(@Body() task: CreateTaskDto): ITask {
         return this.taskService.createTask(task);
+    }
+
+    @Get('email/:email')
+    getTasksByEmail(@Param('email', EmailPipe) email: string): ITask[] {
+        return this.taskService.getTasksByEmail(email);
     }
 
 }

@@ -1,5 +1,5 @@
 import {Status} from "../task.interface";
-import {ArrayNotEmpty, IsEnum, IsNotEmpty, IsOptional, IsString} from "class-validator";
+import {ArrayNotEmpty, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString} from "class-validator";
 
 export class CreateTaskDto{
 
@@ -14,4 +14,8 @@ export class CreateTaskDto{
     @IsOptional()
     @IsEnum(Status,{message:'wrong status'})
     status?: Status;
+
+    @IsOptional()
+    @IsEmail({}, {message: 'not correct email type'})
+    email?: string
 }
