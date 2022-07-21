@@ -1,4 +1,4 @@
-import {Status} from "@src/task/task.interface";
+import {Status} from "../task.interface";
 import {ArrayNotEmpty, IsEnum, IsNotEmpty, IsOptional, IsString} from "class-validator";
 
 export class CreateTaskDto{
