@@ -1,7 +1,8 @@
-import {Body, Controller, Get, Param, Post, UsePipes, ValidationPipe} from '@nestjs/common';
+import {Body, Controller, Get, HttpException, Param, Post, UsePipes, ValidationPipe} from '@nestjs/common';
 import {ITask} from "@src/task/task.interface";
 import {TaskService} from "@src/task/task.service";
 import {CreateTaskDto} from "@src/task/dto/create-task.dto";
+
 
 @Controller('task')
 export class TaskController {
@@ -10,6 +11,7 @@ export class TaskController {
 
     @Get()
     getTasks(): ITask[] {
+      throw new HttpException('error', 400)
         return this.taskService.getTasks();
     }
 
